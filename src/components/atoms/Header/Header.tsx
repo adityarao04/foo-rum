@@ -1,4 +1,4 @@
-import React,{ FC, useContext } from 'react';
+import React,{ FC, useContext, useState , useEffect } from 'react';
 import logo from '/images/mouse.svg';
 import { Link } from 'react-router';
 import { AuthContext } from 'Auth/auth-context';
@@ -15,10 +15,27 @@ const Header: FC<HeaderProps> = () => {
 
     const context = useContext(AuthContext);
 
+    const [scrolled, setScrolled] = useState(false);
 
-    
+const handleScroll = () => {
+  if (window.scrollY > 50) {
+    setScrolled(true);
+  } else {
+    setScrolled(false);
+  }
+};
+
+useEffect(() => {
+  window.addEventListener('scroll', handleScroll);
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+
+
     return (
-        <div className='flex p-4 justify-between items-center'>
+        <header className={`flex p-4 justify-between items-center sticky top-0 z-1000 bg-white ${scrolled ? 'shadow-lg' : 'shadow-none'}`}>
             <Link to={'/'} className='flex-1'>
             <div className="flex gap-2 items-center w-fit flex-1">
                 <img src='/images/mouse.svg' alt="logo" />
@@ -34,7 +51,7 @@ const Header: FC<HeaderProps> = () => {
             </Link>
 
             <div className=""></div>
-        </div>
+        </header>
     )
 }
 
