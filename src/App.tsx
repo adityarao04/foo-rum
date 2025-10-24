@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PageLayout from 'components/Templates/PageLayout/PageLayout';
+
 
 function App() {
   return (
-    <div className="bg-blue-500 text-white p-8 rounded-lg shadow-lg">
-    <h1 className="text-2xl font-bold">Hello World with Tailwind!</h1>
-    <p className="mt-4">This should be styled with Tailwind CSS</p>
-  </div>
+   
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<PageLayout />} />
+    <Route path="/login-register" element={<PageLayout />} />
+  </Routes>
+  </BrowserRouter>
   );
 }
 
