@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 
 interface TooltipProps {
   text: string;
@@ -8,15 +8,6 @@ interface TooltipProps {
 }
 
 const Tooltip: React.FC<TooltipProps> = ({ text, customStyle, children }) => {
-//   const [reverse, setReverse] = useState(false);
-
-//   useEffect(() => {
-//     // reverse the tooltip position for initial index
-//     if (pos === 0) {
-//       setReverse(true);
-//     }
-//   }, [pos]);
-
 
   const arrowClasses = `
     absolute w-2 h-2 bg-gray-200 transform rotate-45

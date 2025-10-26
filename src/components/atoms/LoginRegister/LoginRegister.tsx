@@ -1,7 +1,6 @@
 import { AuthContext } from "Auth/auth-context";
 import { FC, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { loginUser, resetAuthState, signupUser } from "state/ducks/auth";
 import { RootState } from "state/ducks/root-reducer";
 import { validateEmail } from "Utils/helpers/misc";
@@ -9,7 +8,7 @@ import { validateEmail } from "Utils/helpers/misc";
 type LoginRegisterProps = {
 }
 
-const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
+const LoginRegister: FC<LoginRegisterProps> = () => {
 
 
 
@@ -33,7 +32,7 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
         setError(null);
        window.location.href = '/';
     }
-   }, [loginUserState.isAuthenticated]);
+   }, [context, dispatch, loginUserState.isAuthenticated]);
 
     const [ formData, setFormData ] = useState<{
         email: string;
