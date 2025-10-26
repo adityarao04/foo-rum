@@ -135,8 +135,6 @@ src/
 
 - `npm start` - Start development server
 - `npm run build` - Build for production
-- `npm test` - Run tests
-- `npm run eject` - Eject from Create React App
 
 ## 🔐 Authentication
 
