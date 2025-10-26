@@ -9,7 +9,7 @@ import LoginRegister from 'components/atoms/LoginRegister/LoginRegister';
 function App() {
   return (
    <AuthProvider>
-  <BrowserRouter  basename='/foo-rum'>
+  <BrowserRouter>
   <Routes>
     <Route path="/" element={<PageLayout children={<Homepage />} />} />
     <Route path="/login-register" element={<PageLayout children={<LoginRegister />} />} />

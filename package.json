@@ -1,6 +1,5 @@
 {
     "name": "foo-rum",
-    "homepage": "https://adityarao04.github.io/foo-rum",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
