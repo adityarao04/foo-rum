@@ -1,5 +1,7 @@
 import { FeedContent } from 'Data/feedContent';
 import { FC } from 'react';
+import Social from '../Social/Social';
+import { getRelativeTimeString } from 'Utils/helpers/dateHelpers';
 
 
 type FeedProps = {
@@ -7,8 +9,9 @@ type FeedProps = {
 }
 
 const Feed: FC<FeedProps> = ({ content }) => {
+    const relativeTime = getRelativeTimeString(content.created_at);
     return (
-        <div className="w-feed mb-8  min-h-feed bg-feed-bg rounded-lg p-4 rounded-xl">
+        <div className="w-feed mb-8  min-h-feed bg-feed-bg rounded-lg p-2 rounded-xl">
         <div className="w-full bg-white rounded-2xl px-2 py-4 border border-black/10 shadow-feed-content">
         {/* image and name container */}
         <div className="w-full flex gap-2">
@@ -19,7 +22,7 @@ const Feed: FC<FeedProps> = ({ content }) => {
         <div className="w-full flex justify-between items-center">
            <div className="w-full flex flex-col">
                <span className="text-sm font-medium">{content.name}</span>
-               <span className="text-xs text-gray-500">{content.created_at}</span>
+               <span className="text-xs text-gray-500">{relativeTime}</span>
            </div>
         </div>
 
@@ -37,6 +40,7 @@ const Feed: FC<FeedProps> = ({ content }) => {
         </div>
 
         </div>
+        <Social />
         </div>
     )
 }
