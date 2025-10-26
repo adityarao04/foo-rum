@@ -2,6 +2,8 @@ import React,{ FC, useContext, useState , useEffect } from 'react';
 import logo from '/images/mouse.svg';
 import { Link } from 'react-router';
 import { AuthContext } from 'Auth/auth-context';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from 'Storage/dexie';
 
 type HeaderProps = {
 
@@ -12,7 +14,7 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = () => {
 
 
-
+    const dispatch = useDispatch<any>();
     const context = useContext(AuthContext);
 
     const [scrolled, setScrolled] = useState(false);
@@ -33,6 +35,16 @@ useEffect(() => {
 }, []);
 
 
+const handleLoginLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.preventDefault();
+  if(context?.isAuthenticated) {
+    logoutUser();
+  } else {
+    window.location.href = '/login-register';
+  }
+}
+
+
 
     return (
         <header className={`flex p-4 justify-between items-center sticky top-0 z-1000 bg-white ${scrolled ? 'shadow-lg' : 'shadow-none'}`}>
@@ -42,7 +54,7 @@ useEffect(() => {
                 <span className='font-inter font-bold text-base'>foo-rum</span>
             </div>
             </Link>
-            <Link to={'/login-register'}>
+            <Link to={'/login-register'} onClick={handleLoginLogout}>
             <div className="flex gap-2 items-center w-fit">
                 <span className='font-inter font-semibold text-sm leading-none tracking-normal'>{context?.isAuthenticated ? 'logout' : 'login'}</span>
                 <img src='/images/log-in-2.svg' alt="logo" />

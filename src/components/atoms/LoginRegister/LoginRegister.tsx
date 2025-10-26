@@ -1,4 +1,9 @@
-import { FC, useState } from "react";
+import { AuthContext } from "Auth/auth-context";
+import { FC, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser, resetAuthState } from "state/ducks/auth";
+import { RootState } from "state/ducks/root-reducer";
 import { validateEmail } from "Utils/helpers/misc";
 
 type LoginRegisterProps = {
@@ -10,7 +15,26 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
 
     const [login, setLogin] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const context = useContext(AuthContext);
+    const dispatch = useDispatch<any>();
+    const navigate = useNavigate();
+    const loginUserState = useSelector((state: RootState) => state.auth);
 
+
+   useEffect(() => {
+    if(loginUserState.error) {
+        setError(loginUserState.error);
+    }
+   }, [loginUserState.error]);
+
+   useEffect(() => {
+    if(loginUserState.isAuthenticated) {
+        dispatch(resetAuthState());
+        context.setIsAuthenticated(true);
+        setError(null);
+        navigate('/');
+    }
+   }, [loginUserState.isAuthenticated, navigate]);
 
     const [ formData, setFormData ] = useState<{
         email: string;
@@ -24,7 +48,7 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
     });
 
 
- const handleLogin = () => {
+ const handleLogin = async () => {
     setError(null);
     if(formData.email === '' || formData.password === '') {
         setError('Please enter a valid email and password');
@@ -38,6 +62,16 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
 
     if(!validateEmail(formData.email)){
         setError('Please enter a valid email');
+        return;
+    }
+
+
+    try{
+        // const result = await dispatch(loginUser(formData.email, formData.password, false));
+       
+      dispatch(loginUser(formData.email, formData.password, false));
+    }catch(error){
+        console.log("error", error);        // setError(error as string);
         return;
     }
     

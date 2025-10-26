@@ -124,7 +124,8 @@ export const authenticateUser = async(email, password, rememberMe = false) => {
 export const logoutUser = () => {
     try {
         clearUserCookie();
-        return { success: true };
+        window.location.href = '/login-register';
+        // return { success: true };
     } catch (error) {
         console.error('Logout error:', error);
         throw error;

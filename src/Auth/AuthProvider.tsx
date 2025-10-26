@@ -20,11 +20,11 @@ const AuthProvider:FC<AuthContextProps> = (props:AuthContextProps) => {
 
 
     useEffect(()=> {
-        setUserCookie({
-            name: 'Demo User',
-            email: 'demo@example.com',
+        // setUserCookie({
+        //     name: 'Demo User',
+        //     email: 'demo@example.com',
 
-        }, 5);
+        // }, 5);
         // Initialize Dexie database
         const initializeDatabase = async () => {
             try {
