@@ -1,5 +1,4 @@
 import Feed from 'components/atoms/Feed/Feed';
-import feedContent from 'Data/feedContent';
 import { FC, useContext, useEffect } from 'react';
 import AddFeed from '../AddFeed/AddFeed';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +18,7 @@ const FeedContainer: FC<FeedContainerProps> = () => {
 
     useEffect(() => {
         dispatch(fetchFeeds());
-    }, []);
+    }, [dispatch]);
 
     if(
         feeds.loading || context.loading

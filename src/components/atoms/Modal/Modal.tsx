@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './Modal.module.css';
 
 interface ModalProps {
@@ -33,17 +33,17 @@ const Modal: React.FC<ModalProps> = (props) => {
     children
   } = props;
 
-  const close = (e: KeyboardEvent) => {
+  const close = useCallback((e: KeyboardEvent) => {
     if (e.keyCode === 27) {
       onCloseButtonClick?.();
       onBackdropClick?.();
     }
-  };
+  },[onBackdropClick, onCloseButtonClick]);
 
   useEffect(() => {
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, []);
+  }, [close]);
 
   const handleChildElementClick = (e: React.MouseEvent) => {
     e.stopPropagation();

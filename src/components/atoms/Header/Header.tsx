@@ -1,8 +1,6 @@
 import React,{ FC, useContext, useState , useEffect } from 'react';
-import logo from '/images/mouse.svg';
 import { Link } from 'react-router';
 import { AuthContext } from 'Auth/auth-context';
-import { useDispatch } from 'react-redux';
 import { logoutUser } from 'Storage/dexie';
 
 type HeaderProps = {
@@ -13,8 +11,6 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = () => {
 
-
-    const dispatch = useDispatch<any>();
     const context = useContext(AuthContext);
 
     const [scrolled, setScrolled] = useState(false);
