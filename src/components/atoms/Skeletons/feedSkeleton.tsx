@@ -5,7 +5,7 @@ const FeedSkeleton: FC = () => {
         <div className="">
             {[...Array(2)]?.map((_, index) => {
                 return (
-                    <div key={`skeleton-feed-${index}`} className="w-feed mb-8  min-h-feed rounded-lg p-2 rounded-xl">
+                    <div key={`skeleton-feed-${index}`} className="w-[100%] md:w-feed mb-8  min-h-feed rounded-lg p-2 rounded-xl">
                     <div className="w-full rounded-2xl px-2 ">
                     {/* image and name container */}
                     <div className="w-full flex gap-2">

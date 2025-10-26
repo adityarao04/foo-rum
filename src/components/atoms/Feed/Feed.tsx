@@ -11,7 +11,7 @@ type FeedProps = {
 const Feed: FC<FeedProps> = ({ content }) => {
     const relativeTime = getRelativeTimeString(content.created_at);
     return (
-        <div className="w-feed mb-8  min-h-feed bg-feed-bg rounded-lg p-2 rounded-xl">
+        <div className="w-[100%] md:w-feed mb-8  min-h-feed bg-feed-bg rounded-lg p-2 rounded-xl">
         <div className="w-full bg-white rounded-2xl px-2 py-4 border border-black/10 shadow-feed-content">
         {/* image and name container */}
         <div className="w-full flex gap-2">

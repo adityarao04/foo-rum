@@ -1,5 +1,6 @@
+import { AuthContext } from 'Auth/auth-context';
 import FeedRichTextContainer from 'components/atoms/FeedRichTextContainer/FeedRichTextContainer';
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewPost } from 'state/ducks/feed';
 
@@ -19,8 +20,23 @@ const AddFeed: FC<AddFeedProps> = () => {
         emoji_type: "winking_face_with_tongue",
         content: "",
       })
-
+      const [error, setError] = useState<string | null>(null);
+      const context = useContext(AuthContext);
+      console.log('context', context);
+      
      // Add the type here();
+
+     const clearError = () => {
+        setTimeout(()=> {
+            setError(null);
+        }, 2000)
+     }
+
+
+     const handleError = (error: string) => {
+        setError(error);
+        clearError();
+     }
 
 
 
@@ -33,6 +49,15 @@ const AddFeed: FC<AddFeedProps> = () => {
     }
 
     const handleFeedSubmit = () => {
+        if(!context.isAuthenticated) {
+            handleError('Please login to add a feed');
+            return;
+        }
+
+        if(newPost.content.length === 0) {
+            handleError('Please enter a valid feed');
+            return;
+        }
 
         const postPayload = {
             "id": `${Date.now()}`,
@@ -51,7 +76,7 @@ const AddFeed: FC<AddFeedProps> = () => {
 
 
     return (
-        <div className="w-feed mb-8  min-h-feed bg-feed-bg p-2 rounded-xl">
+        <div className="w-[100%] md:w-feed mb-8  min-h-feed bg-feed-bg p-2 rounded-xl">
         <div className="w-full bg-white rounded-t-2xl px-2 py-2 border border-black/10 shadow-feed-content border-b-0">
         <FeedRichTextContainer/>
         <div className="flex w-full mt-6 ml-2 gap-6">
@@ -87,6 +112,7 @@ const AddFeed: FC<AddFeedProps> = () => {
                 <img src="/images/send.svg" alt="send" className='w-[24px] h-[24px]' />
             </button>
         </div>
+        {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
     )
 }
