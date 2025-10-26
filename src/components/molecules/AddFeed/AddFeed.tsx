@@ -1,18 +1,52 @@
 import FeedRichTextContainer from 'components/atoms/FeedRichTextContainer/FeedRichTextContainer';
 import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addNewPost } from 'state/ducks/feed';
 
 type AddFeedProps = {
+}
+
+type setNewPost = {
+    emoji_type: string;
+    content: string;
 }
 
 const AddFeed: FC<AddFeedProps> = () => {
 
 
-    const [feedText, setFeedText] = useState('');
+    const dispatch = useDispatch() as any;
+    const [newPost, setNewPost] = useState<setNewPost>({
+        emoji_type: "winking_face_with_tongue",
+        content: "",
+      })
+
+     // Add the type here();
+
+
+
+
 
 
 
     const handleFeedTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setFeedText(e.target.value);
+        setNewPost((prev) => ({...prev, content: e.target.value}));
+    }
+
+    const handleFeedSubmit = () => {
+
+        const postPayload = {
+            "id": `${Date.now()}`,
+            "name": "Theresa Webb",
+            "profile_pic": null,
+            "created_at": Date.now(),
+            "emoji_type": newPost.emoji_type,
+            "content": newPost.content,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+
+       dispatch(addNewPost(postPayload));
     }
 
 
@@ -28,10 +62,11 @@ const AddFeed: FC<AddFeedProps> = () => {
             {/* text container */}
             <div className="w-full">
                 <textarea 
-                value={feedText} 
+                value={newPost.content} 
                 onChange={handleFeedTextChange} 
                 className='w-full outline-none placeholder-[#00000066] font-inter-medium text-sm resize-none'
                 placeholder='How are you feeling today?'
+                rows={4}
                 ></textarea>
             </div>
         </div>
@@ -48,9 +83,9 @@ const AddFeed: FC<AddFeedProps> = () => {
                 <img src="/images/video-camera.svg" alt="plus" className='w-[18px] h-[18px]' />
                 </div>
             </div>
-            <div className="cursor-pointer">
+            <button className="cursor-pointer" onClick={handleFeedSubmit}>
                 <img src="/images/send.svg" alt="send" className='w-[24px] h-[24px]' />
-            </div>
+            </button>
         </div>
         </div>
     )
