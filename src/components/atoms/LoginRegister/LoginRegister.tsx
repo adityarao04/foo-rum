@@ -2,7 +2,7 @@ import { AuthContext } from "Auth/auth-context";
 import { FC, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser, resetAuthState } from "state/ducks/auth";
+import { loginUser, resetAuthState, signupUser } from "state/ducks/auth";
 import { RootState } from "state/ducks/root-reducer";
 import { validateEmail } from "Utils/helpers/misc";
 
@@ -75,13 +75,42 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
         return;
     }
     
-
-
-    console.log("formData", formData);
  }
 
  const handleSignUp = () => {
-    console.log(formData);
+    setError(null);
+    if(formData.email === '' || formData.password === '') {
+        setError('Please enter a valid email and password');
+        return;
+    }
+    if(formData.retypePassword === '') {
+        setError('Please repeat the password');
+        return;
+    }
+    if(formData.password  !== formData.retypePassword) {
+        setError('Passwords do not match');
+        return;
+    }
+
+    // if(formData.password !== formData.retypePassword) {
+    //     setError('Passwords do not match');
+    //     return;
+    // }
+
+    if(!validateEmail(formData.email)){
+        setError('Please enter a valid email');
+        return;
+    }
+
+
+    try{
+        // const result = await dispatch(loginUser(formData.email, formData.password, false));
+       
+      dispatch(signupUser(formData.email, formData.password));
+    }catch(error){
+        console.log("error in signup", error);        // setError(error as string);
+        return;
+    }
  }
 
 

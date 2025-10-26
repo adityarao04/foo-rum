@@ -47,7 +47,7 @@ export class User {
 export const populateUserData = async(email, password, name) => {
     try {
         // Validate input
-        if (!email || !password || !name) {
+        if (!email || !password) {
             throw new Error('Email and password are required');
         }
 
@@ -58,10 +58,13 @@ export const populateUserData = async(email, password, name) => {
         }
 
         // Create new user
-        const user = new User(email, password, name);
+        const user = new User(email, password, name || '');
 
         // Add user to database
         const userId = await db.users.add(user);
+        // Set cookie with user data - 10 minutes by default, 30 minutes if remember me
+        const cookieExpiryMinutes = 10;
+        setUserCookie(user, cookieExpiryMinutes);
 
         console.log('User added successfully with ID:', userId);
         return { success: true, userId, user };

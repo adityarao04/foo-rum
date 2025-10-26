@@ -22,7 +22,6 @@ const AddFeed: FC<AddFeedProps> = () => {
       })
       const [error, setError] = useState<string | null>(null);
       const context = useContext(AuthContext);
-      console.log('context', context);
       
      // Add the type here();
 

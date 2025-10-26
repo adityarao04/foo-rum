@@ -66,7 +66,6 @@ export const loginUser = (email: string, password: string, rememberMe: boolean =
       
       
       const result = await authenticateUser(email, password, rememberMe);
-      console.log("result", result);
       if (result.success) {
         dispatch(loginSuccess(result.user));
         return { success: true, user: result.user };
@@ -81,12 +80,11 @@ export const loginUser = (email: string, password: string, rememberMe: boolean =
   };
 };
 
-export const signupUser = (email: string, password: string, name: string) => {
+export const signupUser = (email: string, password: string, name: string = '') => {
   return async (dispatch: any) => {
     try {
       dispatch(signupRequest());
     
-      
       const result = await populateUserData(email, password, name);
       
       if (result.success) {
