@@ -75,10 +75,15 @@ const AddFeed: FC<AddFeedProps> = () => {
     }
 
 
+    const removeContentCallback = () => {
+        setNewPost((prev) => ({...prev, content: ""}));
+    }
+
+
     return (
         <div className="w-[100%] md:w-feed mb-8  min-h-feed bg-feed-bg p-2 rounded-xl">
         <div className="w-full bg-white rounded-t-2xl px-2 py-2 border border-black/10 shadow-feed-content border-b-0">
-        <FeedRichTextContainer/>
+        <FeedRichTextContainer removeContentCallback={removeContentCallback}/>
         <div className="flex w-full mt-6 ml-2 gap-6">
             {/* emoji container */}
             <div className="flex-shrink-0 cursor-pointer">
