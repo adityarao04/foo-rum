@@ -17,7 +17,6 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
     const [error, setError] = useState<string | null>(null);
     const context = useContext(AuthContext);
     const dispatch = useDispatch<any>();
-    const navigate = useNavigate();
     const loginUserState = useSelector((state: RootState) => state.auth);
 
 
@@ -32,9 +31,9 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
         dispatch(resetAuthState());
         context.setIsAuthenticated(true);
         setError(null);
-        navigate('/');
+       window.location.href = '/';
     }
-   }, [loginUserState.isAuthenticated, navigate]);
+   }, [loginUserState.isAuthenticated]);
 
     const [ formData, setFormData ] = useState<{
         email: string;
@@ -116,7 +115,7 @@ const LoginRegister: FC<LoginRegisterProps> = ({ }) => {
 
 
     return (
-        <div className="w-[498px] flex flex-col justify-center items-start bg-feed-bg rounded-xl mx-auto my-auto mt-8 p-2">
+        <div className="w-full md:w-[498px] flex flex-col justify-center items-start bg-feed-bg rounded-xl mx-auto my-auto mt-8 p-2">
              <div className="w-full bg-white rounded-2xl px-2 py-4 border border-black/10 shadow-feed-content flex flex-col justify-center items-center">
              <div className="bg-[#F8F8F8] rounded-full h-[53px] w-[53px] flex justify-center items-center">
              <img src='/images/log-in-2.svg' alt="logo" />

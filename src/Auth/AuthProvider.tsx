@@ -2,6 +2,8 @@ import React,{FC,useState, useEffect} from "react";
 import { AuthContext } from "./auth-context";
 import db, { initializeDemoUser } from "../Storage/dexie";
 import { getUserFromCookie, isUserAuthenticated, setUserCookie } from "../Utils/cookieUtils";
+import Modal from "components/atoms/Modal/Modal";
+import LoginRegister from "components/atoms/LoginRegister/LoginRegister";
 
 
 
@@ -15,6 +17,7 @@ const AuthProvider:FC<AuthContextProps> = (props:AuthContextProps) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [dataBaseInitialised, setDataBaseInitialised] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     console.log('dataBaseInitialised', dataBaseInitialised);
 
 
@@ -71,12 +74,20 @@ const AuthProvider:FC<AuthContextProps> = (props:AuthContextProps) => {
         loading,
         setLoading,
         isAuthenticated,
-        setIsAuthenticated
+        setIsAuthenticated,
+        setOpenModal,
+        openModal
 
     }
 
     return <AuthContext.Provider value={value}>
         {props?.children}
+        {openModal ? <Modal 
+  modalTitle={false}
+  onCloseButtonClick={() => setOpenModal(false)}
+>
+  <LoginRegister />
+</Modal> : <></>}
     </AuthContext.Provider>
 
 

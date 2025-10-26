@@ -49,6 +49,7 @@ const AddFeed: FC<AddFeedProps> = () => {
 
     const handleFeedSubmit = () => {
         if(!context.isAuthenticated) {
+            context.setOpenModal(true);
             handleError('Please login to add a feed');
             return;
         }

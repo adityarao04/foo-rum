@@ -1,3 +1,4 @@
+import { AuthContext } from 'Auth/auth-context';
 import { FC } from 'react';
 
 type SocialProps = {

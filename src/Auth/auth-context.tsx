@@ -5,4 +5,6 @@ export const AuthContext = createContext({
     setIsAuthenticated: (value: any) => {},
     loading: true,
     setLoading: (value: any) => {},
+    openModal: false,
+    setOpenModal: (value: any) => {},
 });
