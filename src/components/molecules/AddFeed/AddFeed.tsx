@@ -1,5 +1,6 @@
 import { AuthContext } from 'Auth/auth-context';
 import FeedRichTextContainer from 'components/atoms/FeedRichTextContainer/FeedRichTextContainer';
+import Tooltip from 'components/atoms/Tooltip/Tooltip';
 import { FC, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewPost } from 'state/ducks/feed';
@@ -103,15 +104,23 @@ const AddFeed: FC<AddFeedProps> = () => {
         </div>
         <div className="w-full flex justify-between items-center bg-white rounded-b-2xl rounder- px-2 py-2 border border-black/10 shadow-feed-content  w-full border-top border-[#D9D9D9]">
             <div className="flex gap-4 justify-between items-center">
+                <Tooltip text="Add image: function not implemented">
                 <div className="cursor-pointer bg-[#0000000F] rounded-lg w-[30px] h-[30px] flex items-center justify-center">
                     <img src="/images/plus.svg" alt="plus" className='w-[18px] h-[18px]' />
                 </div>
+
+                </Tooltip>
+                <Tooltip text="add voice recording: function not implemented">
                 <div className="cursor-pointer">
                 <img src="/images/mic.svg" alt="plus" className='w-[18px] h-[18px]' />
                 </div>
+
+                </Tooltip>
+                <Tooltip text="add video: function not implemented">
                 <div className="cursor-pointer">
                 <img src="/images/video-camera.svg" alt="plus" className='w-[18px] h-[18px]' />
                 </div>
+                </Tooltip>
             </div>
             <button className="cursor-pointer" onClick={handleFeedSubmit}>
                 <img src="/images/send.svg" alt="send" className='w-[24px] h-[24px]' />
