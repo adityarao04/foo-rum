@@ -43,7 +43,7 @@ const handleLoginLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
 
 
     return (
-        <header className={`flex p-4 justify-between items-center sticky top-0 z-1000 bg-white ${scrolled ? 'shadow-lg' : 'shadow-none'}`}>
+        <header className={`flex p-4 justify-between items-center sticky top-0 z-[1000] bg-white ${scrolled ? 'shadow-lg' : 'shadow-none'}`}>
             <Link to={'/'} className='flex-1'>
             <div className="flex gap-2 items-center w-fit flex-1">
                 <img src='/images/mouse.svg' alt="logo" />
