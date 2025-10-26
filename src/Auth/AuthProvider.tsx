@@ -1,7 +1,7 @@
 import React,{FC,useState, useEffect} from "react";
 import { AuthContext } from "./auth-context";
 import db, { initializeDemoUser } from "../Storage/dexie";
-import { getUserFromCookie, isUserAuthenticated, setUserCookie } from "../Utils/cookieUtils";
+import { getUserFromCookie } from "../Utils/cookieUtils";
 import Modal from "components/atoms/Modal/Modal";
 import LoginRegister from "components/atoms/LoginRegister/LoginRegister";
 
