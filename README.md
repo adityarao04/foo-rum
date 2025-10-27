@@ -4,7 +4,7 @@ A modern, responsive social feed application built with React and TypeScript, fe
 
 ## 🚀 Live Demo
 
-**GitHub Pages**: [https://foo-rum-xi.vercel.app/](https://adityarao04.github.io/foo-rum)
+**GitHub Pages**: [https://foo-rum-xi.vercel.app/](https://foo-rum-xi.vercel.app/)
 
 ## 📋 Table of Contents
 
